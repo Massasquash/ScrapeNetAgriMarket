@@ -117,8 +117,11 @@ def lanch_browser():
     """ブラウザ立ち上げてログインする
     Return:
         selenium.WebBrowser"""
-    browser = webdriver.Chrome()
-
+    # herokuのchromedriverのPATHを指定
+    driver_path = '/app/.chromedriver/bin/chromedriver'
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    browser = webdriver.Chrome(options=options, executable_path=driver_path)
     # ログインページにアクセスしてログイン・閲覧コード入力
     browser.get(LOGIN_PAGE_URL)
     return browser
